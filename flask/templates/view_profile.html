@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.MEMBER_name }}의 프로필</title>
+    <!-- CSS 파일 연결 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='view_profile.css') }}">
+</head>
+<body>
+    <h1>{{ user.MEMBER_name }}의 프로필</h1>
+    <p>학교: {{ user.School }}</p>
+    
+    {% if user.USER_profile %}
+        <!-- 프로필 이미지 표시 -->
+        <img src="{{ url_for('static', filename=user.USER_profile) }}" alt="프로필 이미지" width="150">
+    {% else %}
+        <!-- 기본 프로필 이미지 표시 -->
+        <img src="{{ url_for('static', filename='default_profile.png') }}" alt="기본 프로필 이미지" width="150">
+    {% endif %}
+    
+    <!-- 메인 페이지로 돌아가기 -->
+    <a href="{{ url_for('index') }}">메인으로</a>
+</body>
+</html>

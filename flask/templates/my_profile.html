@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>내 프로필</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='my_profile.css') }}">
+</head>
+<body>
+    <h1>내 프로필</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label>이름:</label>
+        <input type="text" name="name" value="{{ user.MEMBER_name }}" required>
+        <br>
+        <label>학교:</label>
+        <input type="text" name="school" value="{{ user.School }}" required>
+        <br>
+        <label>프로필 이미지:</label>
+        <input type="file" name="profile_image">
+        <br>
+        {% if user.USER_profile %}
+            <img src="{{ url_for('static', filename=user.USER_profile) }}" alt="프로필 이미지" width="150">
+        {% endif %}
+        <br>
+        <button type="submit">수정하기</button>
+    </form>
+    <a href="/">메인으로</a>
+</body>
+</html>

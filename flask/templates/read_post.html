@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 상세보기</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='read_post.css') }}">
+</head>
+<body>
+    <h1>{{ post.POST_title }}</h1>
+
+    <!-- 게시글 정보 -->
+    <table>
+        <tr>
+            <th>작성자</th>
+            <td>
+                <a href="{{ url_for('view_profile', user_id=post.MEMBER_id) }}">
+                    {{ post.MEMBER_name }}
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th>작성 시간</th>
+            <td>{{ post.Create_time }}</td>
+        </tr>
+        <tr>
+            <th>수정 시간</th>
+            <td>{{ post.Update_time }}</td>
+        </tr>
+        {% if post.File_path %}
+        <tr>
+            <th>첨부 파일</th>
+            <td>
+                <a href="{{ url_for('download', filename=post.File_path.split('/')[-1]) }}">
+                    {{ post.File_path.split('/')[-1] }}
+                </a>
+            </td>
+        </tr>
+        {% endif %}
+    </table>
+    <div class="content-box">
+        <p>{{ post.POST_contents }}</p>
+    </div>
+    <div>
+        <form method="POST" action="{{ url_for('delete_post', post_id=post.POST_id) }}">
+            <button type="submit">삭제</button>
+        </form>
+        <a href="{{ url_for('update_post', post_id=post.POST_id) }}">수정</a>
+        <a href="/">메인으로</a>
+    </div>
+</body>
+</html>

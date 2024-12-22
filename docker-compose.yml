@@ -1,0 +1,35 @@
+# docker-compose.yml
+
+version: '3.8' # 도커 컴프즈의 파일 버전
+
+services:  # 도커 컴포즈에서 정의된 컨테이너 서비스 목록
+  mysql:  # 서비스
+    build:    # mysql 컨테이너의 이미지를 빌드
+      context: ./MySQL   # MySQL의 Dockerfile이 위치한 디렉터리를 지정
+    container_name: mysql2   # 컨테이너 이름 지정
+    ports:
+      - "3309:3306"  # MySQL 호스트/컨테이너 포트 매핑
+    environment:   # 환경 변수 설정
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: DEVPOST
+      MYSQL_USER: halo
+      MYSQL_PASSWORD: 1234
+      TZ: Asia/Seoul
+    volumes:  # 데이터 공유를 위한 볼륨 설정
+      - ./MySQL_data:/var/lib/mysql  # MySQL 데이터 영속성 유지
+      - ./MySQL/init.sql:/docker-entrypoint-initdb.d/init.sql  # 초기화 SQL 스크립트
+      - ./MySQL/my.cnf:/etc/mysql/conf.d/my.cnf # my.cnf 파일 연결
+    restart: always  # 컨테이너 자동 재시작
+
+
+  flask:   # 서비스
+    build:  # flask 컨테이너의 이미지를 빌드
+      context: ./Flask  # Flask의 Dockerfile이 위치한 디렉터리를 지정
+    container_name: flask2  # 컨테이너 이름 지정
+    ports:
+      - "5002:5000"  # Flask 애플리케이션 포트 매핑
+    depends_on:
+      - mysql  # mysql 컨테이너가 시작된 후 실행
+    volumes:
+      - ./Flask:/app  # 호스트와 컨테이너 간 코드 동기화
+    restart: always  # 컨테이너 자동 재시작

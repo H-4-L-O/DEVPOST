@@ -1,0 +1,11 @@
+# 의존성 파일
+
+# Flask 웹 프레임워크
+flask==3.0.0  
+
+# MySQL과 Python 연동
+pymysql==1.1.1  
+
+# caching_sha2_password
+cryptography==44.0.0
+

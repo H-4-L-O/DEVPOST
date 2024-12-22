@@ -1,0 +1,95 @@
+/* 전체 페이지 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+}
+
+/* 제목 스타일 */
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 네비게이션 바 스타일 */
+nav {
+    margin-bottom: 20px;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    background-color: #e0e0e0;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    background-color: #d6d6d6;
+    text-decoration: underline;
+}
+
+/* 게시글 목록 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+thead {
+    background-color: #f1f1f1;
+}
+
+thead th {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+}
+
+tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    color: #555;
+}
+
+tbody td a {
+    text-decoration: none;
+    color: #333;
+}
+
+tbody td a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* 버튼 스타일 */
+button {
+    padding: 10px 20px;
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+button:hover {
+    background-color: #d6d6d6;
+}
+
+/* 하단 추가 정보 */
+footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #777;
+}

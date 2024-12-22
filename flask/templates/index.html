@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>게시판</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+    <h1>게시판</h1>
+    <!-- 네비게이션 바 -->
+    <nav>
+        <a href="/create">새 게시글 작성</a> 
+        {% if session.get('user_id') %}
+            | <a href="/profile">내 정보 보기</a>
+            | <a href="/logout">로그아웃</a>
+        {% else %}
+            | <a href="/login">로그인</a>
+            | <a href="/register">회원가입</a>
+        {% endif %}
+    </nav>
+
+    <!-- 검색 폼 -->
+    <form method="GET" action="/search">
+        <input type="text" name="query" placeholder="검색어를 입력하세요" value="{{ query }}" required>
+        <select name="type">
+            <option value="all" {% if search_type == 'all' %}selected{% endif %}>전체</option>
+            <option value="title" {% if search_type == 'title' %}selected{% endif %}>제목</option>
+            <option value="content" {% if search_type == 'content' %}selected{% endif %}>내용</option>
+            <option value="author" {% if search_type == 'author' %}selected{% endif %}>작성자</option>
+        </select>
+        <button type="submit">검색</button>
+    </form>
+
+    <!-- 게시글 목록 -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성 시간</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <!-- 게시글 제목 -->
+                <td><a href="/read/{{ post.POST_id }}">{{ post.POST_title }}</a></td>
+                <!-- 작성자 이름 -->
+                <td><a href="/profile/{{ post.MEMBER_id }}">{{ post.MEMBER_name }}</a></td>
+                <!-- 작성 시간 -->
+                <td>{{ post.Create_time }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

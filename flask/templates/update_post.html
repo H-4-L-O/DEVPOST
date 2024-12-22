@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>게시글 수정</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='update_post.css') }}">
+</head>
+<body>
+    <h1>게시글 수정</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" value="{{ post.POST_title }}" required><br>
+        <textarea name="content" required>{{ post.POST_contents }}</textarea><br>
+        {% if post.File_path %}
+            <p>첨부된 파일: {{ post.File_path.split('/')[-1] }}</p>
+        {% endif %}
+        <input type="file" name="file"><br>
+        <button type="submit">수정하기</button>
+    </form>
+    <a href="/">메인으로</a>
+</body>
+</html>
